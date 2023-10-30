@@ -1,15 +1,22 @@
 * {
   margin: 0;
+  max-width: 720;
   padding: 0;
   box-sizing: border-box;
-  font-family: Myriad Pro;
+  font-family: "Poppins", sans-serif;
+
+  
 }
 body{
-	background-color: #D3D3D3;
+	align-content: center;
+	background-color: rgb(255, 255, 255);
+	margin: auto:
+
 }
 .wrapper{
 	width: fit-content;
 	margin: auto;
+	max-width: 720px;
 }
 
 .cover{
@@ -19,8 +26,8 @@ body{
 	max-width: 720px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	border-bottom-right-radius: 30px;
-	border-bottom-left-radius: 30px;
+	border-bottom-right-radius: 35px;
+	border-bottom-left-radius: 35px;
 	width: 100%;
 	height: auto;
 }
@@ -45,6 +52,11 @@ body{
 	font-style: oblique;
 }
 .text{
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 20px;
+	padding: 15px; 
+	border-color: #272727
 	height: 50;
 	position: relative;
 	top: -40px;
@@ -56,13 +68,10 @@ body{
 }
 .porto{
 	position: relative;
-	top: -170;
-	margin-right: 60px;
-	margin-left: 60px;
+	top: 10;
 	text-align: center;
 	font-size: large;
-	margin-bottom: 50px;
-}
+	margin-bottom: 70px;
 	position: relative;
 	top: 60px;
 	display: block;
@@ -92,7 +101,7 @@ body{
 	margin-right: 10px;
 	cursor: pointer;
 	align-items: flex-start;
-	text-align: left;
+	text-align: center;
 }
 /* if a pointer on the bottom it can be change backround color */
 .tombol:hover {
@@ -100,7 +109,7 @@ body{
 	color: black;
 }
 .tombol-block{
-	width: 260px;
+	width: 420px;
 	display: inline-block;
 }
 footer{
