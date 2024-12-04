@@ -67,10 +67,8 @@ body{
 	margin-bottom: 50px;
 }
 .porto{
-	position: relative;
-	top: 10;
-	text-align: center;
-	font-size: large;
+	position: center;
+	margin-top: 10;
 	margin-bottom: 70px;
 	position: relative;
 	top: 60px;
