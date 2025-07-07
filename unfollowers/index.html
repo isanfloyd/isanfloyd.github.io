@@ -1,0 +1,60 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IG Unfollower Checker by Nikmatullah Ihsan</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col items-center justify-center p-4">
+  <h1 class="text-3xl font-bold mb-6">Instagram Unfollower Checker</h1>  <div class="space-y-4 w-full max-w-md">
+    <input type="file" id="followersFile" accept="application/json" class="file-input w-full" />
+    <input type="file" id="followingFile" accept="application/json" class="file-input w-full" />
+    <button onclick="analyze()" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded w-full">Cek Unfollowers</button>
+    <pre id="output" class="bg-gray-800 p-4 rounded overflow-x-auto whitespace-pre-wrap"></pre>
+  </div>  <script>
+    async function parseJSON(fileInput) {
+      return new Promise((resolve, reject) => {
+        const file = fileInput.files[0];
+        if (!file) return reject("File tidak ditemukan");
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          try {
+            resolve(JSON.parse(reader.result));
+          } catch (err) {
+            reject("Gagal membaca JSON");
+          }
+        };
+        reader.onerror = () => reject("Gagal membaca file");
+        reader.readAsText(file);
+      });
+    }
+
+    async function analyze() {
+      const output = document.getElementById("output");
+      output.textContent = "Loading...";
+      try {
+        const followersData = await parseJSON(document.getElementById("followersFile"));
+        const followingData = await parseJSON(document.getElementById("followingFile"));
+
+        const followers = new Set(followersData.map(e => e.string_list_data[0].value));
+
+        let following = [];
+        if (Array.isArray(followingData)) {
+          following = followingData.map(e => e.string_list_data[0].value);
+        } else if (followingData.relationships_following) {
+          following = followingData.relationships_following.map(e => e.string_list_data[0].value);
+        } else {
+          throw new Error("Format following.json tidak dikenali");
+        }
+
+        const unfollowers = following.filter(u => !followers.has(u));
+
+        output.textContent = `🔥 Unfollowers (${unfollowers.length}):\n\n` +
+          unfollowers.map(u => `- ${u}`).join("\n");
+      } catch (err) {
+        output.textContent = `❌ Error: ${err}`;
+      }
+    }
+  </script></body>
+</html>
